@@ -24,7 +24,7 @@ jobs:
           sudo apt-get install -y \
             git cmake ninja-build build-essential \
             python3 python3-pip libx11-dev libwayland-dev \
-            libvulkan-dev vulkan-utils
+            libvulkan-dev
 
       # Instalar dependências específicas do Termux, se necessário
       - name: Install Termux dependencies
