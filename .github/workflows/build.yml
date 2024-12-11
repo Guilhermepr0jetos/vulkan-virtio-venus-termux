@@ -1,0 +1,48 @@
+name: Build Vulkan VirtIO Venus Termux
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout o código-fonte do repositório
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Instalar dependências do sistema necessárias
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            git cmake ninja-build build-essential \
+            python3 python3-pip libx11-dev libwayland-dev \
+            libvulkan-dev vulkan-utils
+
+      # Instalar dependências específicas do Termux, se necessário
+      - name: Install Termux dependencies
+        run: |
+          sudo apt-get install -y \
+            qemu-user-static binfmt-support
+
+      # Configurar e compilar o projeto
+      - name: Configure and Build
+        run: |
+          mkdir -p build
+          cd build
+          cmake -G Ninja ..
+          ninja
+
+      # Opcional: Publicar os artefatos construídos
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: vulkan-virtio-venus
+          path: build/
