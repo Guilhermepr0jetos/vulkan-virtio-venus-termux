@@ -7,11 +7,7 @@ PATCHES_DIR="$MAIN_DIR/patches"
 CROSSFILE="$MAIN_DIR/crossfile.ini"
 AOSP_INCLUDE="$MAIN_DIR/aosp/include"
 
-case $(uname -m) in
-    arm64 | aarch64) ARCH="armeabi-v8a" ;;
-    arm | armhf | armv7l | armv8l) ARCH="armeabi-v7a" ;;
-    *) echo "Unsupported architecture $(uname -m)" && exit 1 ;;
-esac
+ARCH="armeabi-v7a"
 
 generate_crossfile() {
 	echo "Generating crossfile for arch: $ARCH"
