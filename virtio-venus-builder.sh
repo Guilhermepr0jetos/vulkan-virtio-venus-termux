@@ -75,7 +75,7 @@ endian = 'little'
 clone_d1() { git clone --depth 1 $1 ;:; }
 
 install_deps() {
-	pkg in \
+	apt install \
 		ccache clang libandroid-shmem \
 		vulkan-headers git cmake vulkan-loader-generic \
 		vulkan-tools libandroid-support libandroid-shmem \
